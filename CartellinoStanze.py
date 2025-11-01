@@ -132,13 +132,22 @@ class CartelliniStanze():
 		file.setFont(self.font_name+"-Bold",name_font_size)
 		ascent = pdfmetrics.getAscent(self.font_name+"-Bold") * name_font_size / 1000.0
 		descent = pdfmetrics.getDescent(self.font_name+"-Bold") * name_font_size / 1000.0
-		line_height = 0.8*cm #ascent - abs(descent)
+		line_height = 0.8*cm
 		total_text_height = len(nomi) * line_height 
 
 		# centro del box del testo
 		x_centro = x + self.larghezza_cartellino / 2
-		y_inizio = y + self.altezza_cartellino - (margine_superiore_box + altezza_box/2) + \
-                     - total_text_height/2 + (len(nomi)-1)*spazio_tra_righe
+
+		if len(nomi) == 1:
+			fixing_value = - total_text_height/2
+			y_inizio = y + self.altezza_cartellino - (margine_superiore_box + altezza_box/2) + \
+                     + fixing_value
+		else:
+			#fixing_value = - total_text_height + (len(nomi)-1)*spazio_tra_righe
+			y_inizio = y + self.altezza_cartellino + \
+					 - (margine_superiore_box + ( altezza_box-line_height*len(nomi) )/(len(nomi)+1)) + \
+                     - line_height -0.1*cm
+		
 
 		for i, riga in enumerate(nomi):
 			# Disegna ogni riga centrata orizzontalmente
