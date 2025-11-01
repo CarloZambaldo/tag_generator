@@ -51,8 +51,6 @@ class CartelliniStanze():
 		self.general_housekeeping_timetable = []
 
 		# Import the data from the csv files
-		ok = -10 # let some attempts to open the files
-
 		comesichiama_file_nomi = "nomiStudenti.csv"
 		comesichiama_file_stanze = "datiStanze.csv"
 
